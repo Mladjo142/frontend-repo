@@ -1,0 +1,21 @@
+<div class="movie-recommendation-container" [formGroup]="recommendationForm">
+    <h4>Dobijte preporuke za filmove temeljene na umjetnoj inteligenciji na temelju vašeg omiljenog filma.</h4> 
+    <div class="movie-recommendation-wrapper"> 
+      <label for="movieName">Unesite ime filma:</label>
+      <input id="movieName" formControlName="movieName" placeholder="Ex: The Matrix, etc." />
+  
+      <label for="rating">Odaberite ocjenu:</label>
+      <select id="rating" formControlName="rating">
+        <option *ngFor="let r of ratings" [value]="r">{{ r }}</option>
+      </select>
+  
+      <button [disabled]="recommendationForm.invalid || disableButton()" (click)="getMovieRecommendations()">
+        Preporuke filmova
+      </button>
+  
+      <ul *ngIf="recommendation()?.movies">
+        <li *ngFor="let movie of recommendation()?.movies">{{ movie }}</li>
+      </ul>
+    </div>
+  </div>
+  
